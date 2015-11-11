@@ -2,3 +2,6 @@ services:
 #    cogitoweb_system_messages.example:
 #        class: Cogitoweb\SystemMessagesBundle\Example
 #        arguments: [@service_id, "plain_value", %parameter%]
+    cogitoweb_system_messages.services.system_messages:
+        class: Cogitoweb\SystemMessagesBundle\Services\SystemMessagesService
+        arguments: [@doctrine.orm.entity_manager]

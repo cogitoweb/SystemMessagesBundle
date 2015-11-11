@@ -38,7 +38,7 @@ class SystemMessage
 	 * @var string
 	 *
 	 * @ORM\Column(type="string", length=20, nullable=true)
-	 * @Assert\Length(max=20)
+	 * @Assert\Choice(choices={"Emergency", "Alert", "Critical", "Error", "Warning", "Notice", "Info", "Debug"})
 	 */
 	protected $severity;
 	
@@ -75,6 +75,17 @@ class SystemMessage
 		$this->setCreatedAt(new \DateTime());
 	}
 	
+	/**
+	 * To string
+	 */
+	public function __toString() {
+		if ($this->getId()) {
+			return sprintf('%s (%s)', $this->getSeverity(), $this->getCreatedAt()->format('m/d/Y H:i:s'));
+		};
+		
+		return 'n/a';
+	}
+	
     /**
 	 * Get id
 	 *
@@ -97,29 +108,57 @@ class SystemMessage
 		
 		$severity = null;
 		switch (substr($code, 0, 1)) {
-			case 0:
-				$severity = 'Emergency';
-				break;
 			case 1:
-				$severity = 'Alert';
+				$severity = 'Debug';
 				break;
 			case 2:
-				$severity = 'Critical';
+				switch (substr($code, 1, 1)) {
+					case 0:
+					case 1:
+					case 2:
+					case 3:
+					case 4:
+						$severity = 'Info';
+						break;
+					case 5:
+					case 6:
+					case 7:
+					case 8:
+					case 9:
+						$severity = 'Notice';
+						break;
+					default:
+						
+				}
 				break;
 			case 3:
-				$severity = 'Error';
-				break;
-			case 4:
 				$severity = 'Warning';
 				break;
+			case 4:
+				$severity = 'Error';
+				break;
 			case 5:
-				$severity = 'Notice';
+				switch (substr($code, 1, 1)) {
+					case 0:
+					case 1:
+					case 2:
+					case 3:
+					case 4:
+						$severity = 'Critical';
+						break;
+					case 5:
+					case 6:
+					case 7:
+					case 8:
+					case 9:
+						$severity = 'Alert';
+						break;
+					default:
+						
+				}
 				break;
 			case 6:
-				$severity = 'Informational';
-				break;
-			case 7:
-				$severity = 'Debug';
+				$severity = 'Emergency';
 				break;
 			default:
 				
@@ -183,6 +222,16 @@ class SystemMessage
 	public function getMessage()
 	{
 		return $this->message;
+	}
+	
+	/**
+	 * Get message
+	 *
+	 * @return string 
+	 */
+	public function getShortMessage()
+	{
+		return sprintf('%s...', substr($this->message, 0, 200));
 	}
 	
 	/**

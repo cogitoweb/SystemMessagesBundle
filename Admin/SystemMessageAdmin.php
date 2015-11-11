@@ -24,15 +24,26 @@ class SystemMessageAdmin extends Admin
 	/**
 	 * {@inheritdoc}
 	 */
+	protected function configureRoutes(\Sonata\AdminBundle\Route\RouteCollection $collection) {
+		$collection
+			->remove('create')
+			->remove('edit')
+			->remove('delete')
+		;
+	}
+	
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function configureDatagridFilters(DatagridMapper $datagridMapper)
 	{
 		$datagridMapper
-			->add('severity')
+			->add('severity',  'doctrine_orm_choice', [], 'choice', ['choices' => ['Emergency', 'Alert', 'Critical', 'Error', 'Warning', 'Notice', 'Informational', 'Debug']])
 			->add('message')
 			->add('createdAt', 'doctrine_orm_datetime_range', [], null, [
 				'widget' => 'single_text',
 				'attr'   => ['class' => 'datepicker'],
-				'format' => 'dd/MM/yyyy HH:mm:ss'
+				'format' => 'dd/MM/yyyy'
 			])
 		;
 	}
@@ -43,12 +54,13 @@ class SystemMessageAdmin extends Admin
 	protected function configureListFields(ListMapper $listMapper)
 	{
 		$listMapper
-			->add('code')
 			->add('severity')
-			->add('message')
+			->add('shortMessage')
 			->add('createdAt', 'datetime', ['pattern'  => 'dd/MM/yyyy HH:mm:ss'])
 			->add('_action', 'actions', ['actions' => [
-				'show' => []
+				'show'   => [],
+				'edit'   => [],
+				'delete' => []
 			]])
 		;
 	}
