@@ -38,7 +38,16 @@ class SystemMessageAdmin extends Admin
 	protected function configureDatagridFilters(DatagridMapper $datagridMapper)
 	{
 		$datagridMapper
-			->add('severity',  'doctrine_orm_choice', [], 'choice', ['choices' => ['Emergency', 'Alert', 'Critical', 'Error', 'Warning', 'Notice', 'Informational', 'Debug']])
+			->add('severity',  'doctrine_orm_choice', [], 'choice', ['choices' => [
+				'Emergency' => 'Emergency',
+				'Alert'     => 'Alert',
+				'Critical'  => 'Critical',
+				'Error'     => 'Error',
+				'Warning'   => 'Warning',
+				'Notice'    => 'Notice',
+				'Info'      => 'Info',
+				'Debug'     => 'Debug'
+			]])
 			->add('message')
 			->add('createdAt', 'doctrine_orm_datetime_range', [], null, [
 				'widget' => 'single_text',
