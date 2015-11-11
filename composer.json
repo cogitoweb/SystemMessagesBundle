@@ -1,0 +1,25 @@
+{
+	"name": "cogitoweb/system-messages-bundle",
+	"description": "Store on DB messages to be shown to users",
+	"type": "symfony-bundle",
+	"authors": [
+		{
+			"name":  "Daniele Artico",
+			"email": "daniele.artico@cogitoweb.it"
+		}
+	],
+	"keywords": [
+		"system messages"
+	],
+	"autoload": {
+		"psr-0": {
+			"Cogitoweb\\SystemMessagesBundle": ""
+		}
+	},
+	"require": {
+		"friendsofsymfony/jsrouting-bundle": "^1.5",
+		"gedmo/doctrine-extensions":         "~2.3",
+		"symfony/symfony":                   "~2.3"
+	},
+	"target-dir" : "Cogitoweb/SystemMessagesBundle"
+}

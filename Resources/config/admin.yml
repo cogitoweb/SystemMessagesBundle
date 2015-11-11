@@ -1,0 +1,6 @@
+services:
+    cogitoweb_system_messages.admin.system_message:
+        class: Cogitoweb\SystemMessagesBundle\Admin\SystemMessageAdmin
+        arguments: [~, Cogitoweb\SystemMessagesBundle\Entity\SystemMessage, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: System messages}

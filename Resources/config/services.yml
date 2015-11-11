@@ -1,0 +1,4 @@
+services:
+#    cogitoweb_system_messages.example:
+#        class: Cogitoweb\SystemMessagesBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

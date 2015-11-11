@@ -1,0 +1,3 @@
+cogitoweb_system_messages_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: CogitowebSystemMessagesBundle:Default:index }
