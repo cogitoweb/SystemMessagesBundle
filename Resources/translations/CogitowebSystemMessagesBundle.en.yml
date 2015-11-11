@@ -1,0 +1,22 @@
+## YAML Template.
+---
+
+breadcrumb:
+    link_system_message_list:	System messages list
+
+filter:
+    label_severity:				Severity
+    label_message:				Message
+    label_created_at:			Created at
+
+list:
+    label_severity:				Severity
+    label_short_message:		Message preview
+    label_created_at:			Created at
+    label__action:				Actions
+
+show:
+    label_code:					Code
+    label_severity:				Severity
+    label_message:				Message
+    label_created_at:			Created at
